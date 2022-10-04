@@ -16,3 +16,5 @@ export const GET_SEARCH_MOVIES = "GET_SEARCH_MOVIES";
 //for set
 export const SET_MOVIE_DETAILS = "SET_MOVIE_DETAILS";
 export const RESET_MOVIE_DETAILS = "RESET_MOVIE_DETAILS";
+//for watch movie
+export const GET_VIDEO_TRAILER = "GET_VIDEO_TRAILER";

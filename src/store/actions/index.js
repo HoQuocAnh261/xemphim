@@ -117,9 +117,19 @@ export const getSearchMovies = (keyword) => async (dispatch) => {
     const result = await axios.get(
       `${BASE_URL}/search/multi?api_key=${API_KEY}&language=vi-VN&include_adult=false&query=${keyword}`
     );
-    console.log(result.data.results);
     dispatch({ type: Types.GET_SEARCH_MOVIES, payload: result.data.results });
   } catch (error) {
     console.log("search movies api error", error);
+  }
+};
+
+export const getMovieTrailer = (movie_id) => async (dispatch) => {
+  try {
+    const result = await axios.get(
+      `${BASE_URL}/movie/${movie_id}/videos?api_key=${API_KEY}&language=vi-VN`
+    );
+    dispatch({ type: Types.GET_VIDEO_TRAILER, payload: result.data.results });
+  } catch (error) {
+    console.log("get video movie api error", error);
   }
 };

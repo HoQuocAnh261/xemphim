@@ -4,11 +4,13 @@ import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import * as Types from "../../store/type";
+import Button from "../Button";
 
 function MovieDetails(props) {
   const { showModal, movie } = props;
   const dispatch = useDispatch();
   const handleCloseModal = () => dispatch({ type: Types.RESET_MOVIE_DETAILS });
+
   return (
     <MovieDetailsWrapper>
       <div
@@ -65,6 +67,15 @@ function MovieDetails(props) {
             <p className="overview">{movie && movie.overview}</p>
           </div>
           <MdClose className="closeBtn" onClick={handleCloseModal} />
+          <div className="btnWatchMovie">
+            <Button
+              link={`/xemphim/xem-trailer/${movie && movie.id}`}
+              bgColor="#DD003F"
+              color="#FFFFFF"
+            >
+              Xem Phim
+            </Button>
+          </div>
         </div>
       </div>
     </MovieDetailsWrapper>
@@ -100,7 +111,7 @@ const MovieDetailsWrapper = styled.div`
     left: 0;
     z-index: 500;
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     margin: 0 auto;
     color: #fff;
     opacity: 0;

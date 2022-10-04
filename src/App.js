@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Search from "./pages/Search";
+import TrailerVideo from "./components/TrailerVideo";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/xemphim" element={<Home />} />
+          <Route path="/xemphim/search" element={<Search />} />
+          <Route path="/xemphim/xem-trailer/:id" element={<TrailerVideo />} />
         </Routes>
       </BrowserRouter>
     </div>
