@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/xemphim/static/css/main.6c4b7ef3.css",
+    "main.js": "/xemphim/static/js/main.07eb9df4.js",
+    "static/media/logo.webp": "/xemphim/static/media/logo.dbe44fca62a86208e8eb.webp",
+    "index.html": "/xemphim/index.html",
+    "main.6c4b7ef3.css.map": "/xemphim/static/css/main.6c4b7ef3.css.map",
+    "main.07eb9df4.js.map": "/xemphim/static/js/main.07eb9df4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6c4b7ef3.css",
+    "static/js/main.07eb9df4.js"
+  ]
+}
