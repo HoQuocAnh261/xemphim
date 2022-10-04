@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import styledComponents from "styled-components";
 import { useViewport } from "../../hooks";
 import { getSearchMovies, setMovieDetails } from "../../store/actions";
-import MovieDetails from "../MovieDetails";
 
 function SearchMovies() {
   const [windowDimensions] = useViewport();
