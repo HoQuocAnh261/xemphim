@@ -16,11 +16,11 @@ function Navbar(props) {
     if (keyword.trim().length > 0) {
       navigate(`/search?keyword=${keyword.trim()}`);
     } else {
-      navigate("/");
+      navigate("/xemphim");
     }
   };
   const goHome = () => {
-    navigate("/");
+    navigate("/xemphim");
     setKeyword("");
   };
   return (
