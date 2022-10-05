@@ -12,10 +12,10 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/xemphim" element={<Home />} />
-          <Route path="/xemphim/info/:id" element={<Info />} />
-          <Route path="/xemphim/search" element={<Search />} />
-          <Route path="/xemphim/watch-movie/:id" element={<TrailerVideo />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/info/:id" element={<Info />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/watch-movie/:id" element={<TrailerVideo />} />
         </Routes>
       </BrowserRouter>
     </div>

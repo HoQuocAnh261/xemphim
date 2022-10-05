@@ -14,13 +14,13 @@ function Navbar(props) {
     let keyword = e.target.value;
     setKeyword(keyword);
     if (keyword.trim().length > 0) {
-      navigate(`/xemphim/search?keyword=${keyword.trim()}`);
+      navigate(`/search?keyword=${keyword.trim()}`);
     } else {
-      navigate("/xemphim");
+      navigate("/");
     }
   };
   const goHome = () => {
-    navigate("/xemphim");
+    navigate("/");
     setKeyword("");
   };
   return (

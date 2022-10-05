@@ -21,7 +21,7 @@ function MovieRow(props) {
 
   const handleSelectMovie = (id) => {
     dispatch(setMovieDetails(id));
-    navigate(`/xemphim/info/${id}`);
+    navigate(`/info/${id}`);
   };
 
   const handleScrollRight = () => {

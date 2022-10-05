@@ -69,7 +69,7 @@ function MovieDetails(props) {
           <MdClose className="closeBtn" onClick={handleCloseModal} />
           <div className="btnWatchMovie">
             <Button
-              link={`/xemphim/watch-movie/${movie && movie.id}`}
+              link={`/watch-movie/${movie && movie.id}`}
               bgColor="#DD003F"
               color="#FFFFFF"
             >
