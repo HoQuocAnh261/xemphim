@@ -45,7 +45,7 @@ function SearchMovies() {
                   key={index}
                   onClick={() => {
                     dispatch(setMovieDetails(movie.id));
-                    navigate("/xemphim/info");
+                    navigate(`/xemphim/info/${movie.id}`);
                   }}
                 >
                   <img

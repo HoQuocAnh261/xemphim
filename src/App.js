@@ -13,9 +13,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/xemphim" element={<Home />} />
-          <Route path="/xemphim/info" element={<Info />} />
+          <Route path="/xemphim/info/:id" element={<Info />} />
           <Route path="/xemphim/search" element={<Search />} />
-          <Route path="/xemphim/xem-trailer/:id" element={<TrailerVideo />} />
+          <Route path="/xemphim/watch-movie/:id" element={<TrailerVideo />} />
         </Routes>
       </BrowserRouter>
     </div>
