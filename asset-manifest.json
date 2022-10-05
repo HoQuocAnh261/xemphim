@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/xemphim/static/css/main.bdb753ca.css",
-    "main.js": "/xemphim/static/js/main.e72e578e.js",
+    "main.js": "/xemphim/static/js/main.4001d719.js",
     "static/media/logo.webp": "/xemphim/static/media/logo.dbe44fca62a86208e8eb.webp",
     "index.html": "/xemphim/index.html",
     "main.bdb753ca.css.map": "/xemphim/static/css/main.bdb753ca.css.map",
-    "main.e72e578e.js.map": "/xemphim/static/js/main.e72e578e.js.map"
+    "main.4001d719.js.map": "/xemphim/static/js/main.4001d719.js.map"
   },
   "entrypoints": [
     "static/css/main.bdb753ca.css",
-    "static/js/main.e72e578e.js"
+    "static/js/main.4001d719.js"
   ]
 }
