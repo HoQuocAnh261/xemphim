@@ -14,7 +14,7 @@ function Navbar(props) {
     let keyword = e.target.value;
     setKeyword(keyword);
     if (keyword.trim().length > 0) {
-      navigate(`/search?keyword=${keyword.trim()}`);
+      navigate(`/xemphim/search?keyword=${keyword.trim()}`);
     } else {
       navigate("/xemphim");
     }

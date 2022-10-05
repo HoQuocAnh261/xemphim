@@ -44,6 +44,8 @@ const reducerMovies = (
       return { ...state, searchMovies: payload };
     case Types.GET_VIDEO_TRAILER:
       return { ...state, movieTrailer: payload };
+    case Types.RESET_SEARCH_MOVIES_:
+      return { ...state, searchMovies: null };
     default:
       return state;
   }

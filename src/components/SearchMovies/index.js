@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styledComponents from "styled-components";
 import { useViewport } from "../../hooks";
 import { getSearchMovies, setMovieDetails } from "../../store/actions";
@@ -11,6 +11,7 @@ function SearchMovies() {
   const location = useLocation();
   const keyword = location.search.split("?keyword=")[1];
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (keyword) {
@@ -42,7 +43,10 @@ function SearchMovies() {
                 <div
                   className="movieItem"
                   key={index}
-                  onClick={() => dispatch(setMovieDetails(movie.id))}
+                  onClick={() => {
+                    dispatch(setMovieDetails(movie.id));
+                    navigate("/xemphim/info");
+                  }}
                 >
                   <img
                     src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}

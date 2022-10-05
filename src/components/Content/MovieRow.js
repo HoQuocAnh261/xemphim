@@ -5,6 +5,7 @@ import { SmoothHorizontalScrolling } from "../../utils";
 import { useViewport } from "../../hooks";
 import { useDispatch } from "react-redux";
 import { setMovieDetails } from "../../store/actions";
+import { useNavigate } from "react-router-dom";
 
 function MovieRow(props) {
   const { movies, title, isNetflix, idSection } = props;
@@ -16,9 +17,11 @@ function MovieRow(props) {
   const [windowDimensions] = useViewport();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSelectMovie = (id) => {
     dispatch(setMovieDetails(id));
+    navigate("/xemphim/info");
   };
 
   const handleScrollRight = () => {
