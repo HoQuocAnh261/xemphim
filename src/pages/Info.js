@@ -6,6 +6,8 @@ function Info() {
   const { movieDetails } = useSelector((state) => state.infoMovies);
   const [isShowModal, setIsShowModal] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     setIsShowModal(movieDetails ? true : false);
   }, [movieDetails]);
   return (

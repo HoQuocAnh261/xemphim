@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMovieTrailer } from "../../store/actions";
 
 function Intro(props) {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   const isMutedHandler = () => setIsMuted((prev) => !prev);
   const { trendingMovies, movieTrailer } = useSelector(

@@ -39,14 +39,23 @@ export default Footer;
 
 const FooterPane = styledComponents.div`
     background:url(${bgFooter});
-    height:490px;
+    height:400px;
     position:relative;
+
+    @media only screen and (max-width: 600px) {
+        height: 200px;
+    }
 
     .container {
         position:absolute;
         bottom: 120px;
         right: 80px;
         width:100%;
+
+        @media only screen and (max-width: 600px) {
+            bottom: 46px;
+            right: 46px;
+        }
 
         .list-item {
             display:flex;
