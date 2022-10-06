@@ -126,7 +126,7 @@ export const getSearchMovies = (keyword) => async (dispatch) => {
 export const getMovieTrailer = (movie_id) => async (dispatch) => {
   try {
     const result = await axios.get(
-      `${BASE_URL}/movie/${movie_id}/videos?api_key=${API_KEY}&language=vi-VN`
+      `${BASE_URL}/movie/${movie_id}/videos?api_key=${API_KEY}&language=en-US`
     );
     dispatch({ type: Types.GET_VIDEO_TRAILER, payload: result.data.results });
   } catch (error) {

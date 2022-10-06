@@ -1,32 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { VscMute, VscUnmute } from "react-icons/vsc";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieTrailer } from "../../store/actions";
 
 function Intro(props) {
   const [isMuted, setIsMuted] = useState(false);
 
   const isMutedHandler = () => setIsMuted((prev) => !prev);
+  const { trendingMovies, movieTrailer } = useSelector(
+    (state) => state.infoMovies
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (trendingMovies) {
+      dispatch(getMovieTrailer(trendingMovies[0].id));
+    }
+  }, [dispatch, trendingMovies]);
   return (
     <IntroContainer>
-      <ReactPlayer
-        playing={true}
-        width="100%"
-        height="100%"
-        controls={true}
-        loop={true}
-        volume={1}
-        muted={isMuted}
-        url="https://vimeo.com/276483121"
-        className="videoIntro"
-      />
-      <div className="infoIntro">
-        <h1 className="headingIntro">부산행 TRAIN TO BUSAN</h1>
-        <p className="overviewIntro">
-          Client : Feelgood Entertainment Trailer : Train To Busan Post
-          Production Coordinator : Angel Ballas Editor : Alexis Quantas
-        </p>
-      </div>
+      {movieTrailer && movieTrailer[0] && (
+        <ReactPlayer
+          playing={true}
+          width="100%"
+          height="100%"
+          controls={false}
+          loop={true}
+          volume={1}
+          muted={isMuted}
+          url={`https://www.youtube.com/watch?v=${movieTrailer[0].key}`}
+          className="videoIntro"
+        />
+      )}
+
+      {trendingMovies && (
+        <div className="infoIntro">
+          <h1 className="headingIntro">
+            {trendingMovies[0].title || trendingMovies[0].name}
+          </h1>
+          <p className="overviewIntro">{trendingMovies[0].overview}</p>
+        </div>
+      )}
+
       {!isMuted ? (
         <VscUnmute className="btnVolume" onClick={isMutedHandler} />
       ) : (
@@ -49,12 +66,14 @@ const IntroContainer = styled.div`
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
   }
 
   .infoIntro {
     position: absolute;
     top: 140px;
-    left: 30px;
+    left: 62px;
+    z-index: 10;
 
     @media screen and (max-width: 800px) {
       top: 120px;
