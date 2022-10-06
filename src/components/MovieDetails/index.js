@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import { useViewport } from "../../hooks";
 import { setMovieDetails } from "../../store/actions";
 import * as Types from "../../store/type";
 import Button from "../Button";
@@ -12,6 +13,11 @@ function MovieDetails(props) {
   const { movie } = props;
   const dispatch = useDispatch();
   const params = useParams();
+  const [windowDimensions] = useViewport();
+
+  const { width } = windowDimensions;
+
+  const urlBgImage = width > 600 ? movie?.backdrop_path : movie?.poster_path;
 
   useEffect(() => {
     dispatch(setMovieDetails(params.id));
@@ -24,9 +30,7 @@ function MovieDetails(props) {
         style={
           movie
             ? {
-                backgroundImage: `url(https://image.tmdb.org/t/p/original/${
-                  movie.backdrop_path || movie.poster_path
-                })`,
+                backgroundImage: `url(https://image.tmdb.org/t/p/original/${urlBgImage})`,
                 backgroundSize: "cover",
               }
             : {}
@@ -86,8 +90,8 @@ export default MovieDetails;
 const MovieDetailsWrapper = styled.div`
   .container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 90vh;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.94) 60%, transparent);
     @media only screen and (max-width: 1184px) {
       background: linear-gradient(
@@ -96,15 +100,12 @@ const MovieDetailsWrapper = styled.div`
         rgba(0, 0, 0, 0.733),
         transparent
       );
-      width: 88%;
     }
     @media only screen and (max-width: 980px) {
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 50%, transparent);
       width: 100%;
     }
     @media only screen and (max-width: 600px) {
-      margin-top: 10px;
-      margin-left: 10px;
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 60%, transparent);
     }
     .infoMovie {

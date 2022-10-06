@@ -1,20 +1,21 @@
 import React from "react";
 import styledComponents from "styled-components";
+import { Link } from "react-router-dom";
 
 function IconButton(props) {
   const { icon, link } = props;
   return (
     <IconButtonPane>
-      <a href={`${link}`} target="_blank" rel="noreferrer ">
+      <Link to={`${link}`} target="_blank">
         {icon}
-      </a>
+      </Link>
     </IconButtonPane>
   );
 }
 
 export default IconButton;
 
-const IconButtonPane = styledComponents.a`
+const IconButtonPane = styledComponents.div`
     display: flex;
     align-items: center;
     justify-content: center;
