@@ -9,7 +9,6 @@ function Button(props) {
         <button style={{ backgroundColor: bgColor, color: color }}>
           {children}
         </button>
-        ;
       </Link>
     </>
   );

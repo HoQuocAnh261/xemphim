@@ -1,24 +1,26 @@
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import { setMovieDetails } from "../../store/actions";
 import * as Types from "../../store/type";
 import Button from "../Button";
 
 function MovieDetails(props) {
-  const { showModal, movie } = props;
+  const { movie } = props;
   const dispatch = useDispatch();
-  const handleCloseModal = () => dispatch({ type: Types.RESET_MOVIE_DETAILS });
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(setMovieDetails(params.id));
+  }, [dispatch, params.id]);
 
   return (
     <MovieDetailsWrapper>
       <div
-        className={`backdrop ${showModal ? "showBackdrop" : "hideBackdrop"}`}
-        onClick={handleCloseModal}
-      ></div>
-      <div
-        className={`modal ${showModal ? "showModal" : "hideModal"}`}
+        className="container"
         style={
           movie
             ? {
@@ -30,52 +32,50 @@ function MovieDetails(props) {
             : {}
         }
       >
-        <div className="container">
-          <div className="infoMovie">
-            <h1 className="title">{movie && (movie.title || movie.name)}</h1>
-            <p className="statistical">
-              <span className="rating">
-                Điểm IMDb:{" "}
-                <strong className="ratingScores">
-                  {movie && movie.vote_average}
-                </strong>
-              </span>
-              <span className="popularity">
-                Thể Loại:{" "}
-                {movie &&
-                  movie.genres.map((item, index) => {
-                    return <span key={index}>{item.name}, </span>;
-                  })}
-              </span>
-            </p>
-            <p className="releaseDate">
-              Ngày phát hành:{" "}
+        <div className="infoMovie">
+          <h1 className="title">{movie && (movie.title || movie.name)}</h1>
+          <p className="statistical">
+            <span className="rating">
+              Điểm IMDb:{" "}
+              <strong className="ratingScores">
+                {movie && movie.vote_average}
+              </strong>
+            </span>
+            <span className="popularity">
+              Thể Loại:{" "}
               {movie &&
-                (moment(movie.release_date).format("DD/MM/YYYY") ||
-                  moment(movie.first_air_date).format("DD/MM/YYYY"))}
-            </p>
+                movie.genres.map((item, index) => {
+                  return <span key={index}>{item.name}, </span>;
+                })}
+            </span>
+          </p>
+          <p className="releaseDate">
+            Ngày phát hành:{" "}
+            {movie &&
+              (moment(movie.release_date).format("DD/MM/YYYY") ||
+                moment(movie.first_air_date).format("DD/MM/YYYY"))}
+          </p>
 
-            <p className="episode">
-              {movie &&
-                (movie.number_of_episodes
-                  ? " Episodes: " + movie.number_of_episodes
-                  : "") &&
-                (movie.number_of_seasons
-                  ? " Seasons: " + movie.number_of_seasons
-                  : "")}
-            </p>
-            <p className="overview">{movie && movie.overview}</p>
-          </div>
-          <MdClose className="closeBtn" onClick={handleCloseModal} />
-          <div className="btnWatchMovie">
-            <Button
-              link={`/watch-movie/${movie && movie.id}`}
-              bgColor="#DD003F"
-              color="#FFFFFF"
-            >
-              Xem Phim
-            </Button>
-          </div>
+          <p className="episode">
+            {movie &&
+              (movie.number_of_episodes
+                ? " Episodes: " + movie.number_of_episodes
+                : "") &&
+              (movie.number_of_seasons
+                ? " Seasons: " + movie.number_of_seasons
+                : "")}
+          </p>
+          <p className="overview">{movie && movie.overview}</p>
+        </div>
+
+        <div className="btnWatchMovie">
+          <Button
+            link={`/watch-movie/${movie && movie.id}`}
+            bgColor="#DD003F"
+            color="#FFFFFF"
+          >
+            Xem Phim
+          </Button>
         </div>
       </div>
     </MovieDetailsWrapper>
@@ -83,155 +83,82 @@ function MovieDetails(props) {
 }
 
 export default MovieDetails;
-const fadeIn = keyframes`
-  0% { background: rgba(0, 0, 0, 0);}
-  100% { background: rgba(0, 0, 0, 0.6); }
-`;
 const MovieDetailsWrapper = styled.div`
-  .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 200;
-    background-color: rgba(0, 0, 0, 0.6);
-    animation: ${fadeIn} 1s cubic-bezier(0.17, 0.85, 0.45, 1) forwards;
-  }
-  .showBackdrop {
-    display: block;
-  }
-  .hideBackdrop {
-    display: none;
-  }
-  .modal {
-    position: fixed;
-    visibility: hidden;
-    top: 0;
-    left: 0;
-    z-index: 500;
+  .container {
+    position: relative;
     width: 100vw;
-    height: 80vh;
-    margin: 0 auto;
-    color: #fff;
-    opacity: 0;
-    box-shadow: 0 15px 40px rgba(var(--color-dark), 0.2);
-    transition: all 0.3s;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.94) 60%, transparent);
     @media only screen and (max-width: 1184px) {
-      height: 70%;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.95) 40%,
+        rgba(0, 0, 0, 0.733),
+        transparent
+      );
+      width: 88%;
+    }
+    @media only screen and (max-width: 980px) {
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.95) 50%, transparent);
+      width: 100%;
     }
     @media only screen and (max-width: 600px) {
-      height: 80%;
+      margin-top: 10px;
+      margin-left: 10px;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.88) 60%, transparent);
     }
-    .container {
-      position: relative;
-      width: 70%;
+    .infoMovie {
+      width: 65%;
       height: 100%;
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.94) 60%, transparent);
-      @media only screen and (max-width: 1184px) {
-        background: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0.95) 40%,
-          rgba(0, 0, 0, 0.733),
-          transparent
-        );
-        width: 88%;
-      }
-      @media only screen and (max-width: 980px) {
-        background: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0.95) 50%,
-          transparent
-        );
-        width: 100%;
-      }
+      padding-left: 24px;
+      color: #fff;
+      font-size: 20px;
+      padding-top: 30px;
       @media only screen and (max-width: 600px) {
-        margin-top: 10px;
-        margin-left: 10px;
-        background: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0.88) 60%,
-          transparent
-        );
+        font-size: 16px;
+        width: 80%;
       }
-      .infoMovie {
-        width: 65%;
-        height: 100%;
-        padding-left: 24px;
-        color: #fff;
-        font-size: 20px;
-        padding-top: 30px;
-        @media only screen and (max-width: 600px) {
-          font-size: 16px;
-          width: 80%;
-        }
-        .title {
-          margin-top: 30px;
-        }
-        .statistical {
-          margin-top: 20px;
-          display: flex;
-          .rating {
-            color: var(--color-green-modal);
+      .title {
+        margin-top: 30px;
+      }
+      .statistical {
+        margin-top: 20px;
+        display: flex;
+        .rating {
+          color: var(--color-green-modal);
 
-            .ratingScores {
-              color: black;
-              border-radius: 4px;
-              background-color: #e3b71e;
-              padding: 4px;
-            }
-          }
-          .popularity {
-            margin-left: 12px;
-            color: yellow;
+          .ratingScores {
+            color: black;
+            border-radius: 4px;
+            background-color: #e3b71e;
+            padding: 4px;
           }
         }
-        .releaseDate,
-        .runtime,
-        .episode {
-          margin-top: 12px;
-        }
-        .overview {
-          margin-top: 20px;
-          color: rgba(255, 255, 255, 0.6);
-          line-height: 1.4;
-          font-size: 18px;
-          @media only screen and (max-width: 600px) {
-            font-size: 14px;
-          }
+        .popularity {
+          margin-left: 12px;
+          color: yellow;
         }
       }
-      .closeBtn {
-        position: absolute;
-        top: 10px;
-        left: 16px;
-        width: 30px;
-        height: 30px;
-        padding: 2px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.6);
+      .releaseDate,
+      .runtime,
+      .episode {
+        margin-top: 12px;
+      }
+      .overview {
+        margin-top: 20px;
         color: rgba(255, 255, 255, 0.6);
-        transform: scale(1);
-        transition: all 0.3s ease;
-        &:hover {
-          transform: scale(1.1);
-          color: rgba(255, 255, 255, 0.95);
-          background-color: rgba(255, 255, 255, 0.4);
+        line-height: 1.4;
+        font-size: 18px;
+        @media only screen and (max-width: 600px) {
+          font-size: 14px;
         }
       }
     }
-  }
-  .showModal {
-    top: 0;
-    opacity: 1;
-    left: 0;
-    visibility: visible;
-    transition: 0.3s ease-out;
-  }
-  .hideModal {
-    top: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease-out;
+
+    .btnWatchMovie {
+      position: absolute;
+      bottom: 80px;
+      right: 80px;
+    }
   }
 `;
